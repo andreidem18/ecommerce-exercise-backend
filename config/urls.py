@@ -22,6 +22,7 @@ from drf_yasg import openapi
 from rest_framework import permissions
 from rest_framework.routers import DefaultRouter
 from cart.views import buy_cart, empty_cart, get_cart, change_quantity, remove_item
+from categories.views import get_categories
 from orders.views import get_orders
 from products.views import add_to_cart, products
 from users.views import UserViewSet
@@ -52,6 +53,7 @@ urlpatterns = [
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('categories/', get_categories),
     path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('orders', get_orders),
     path('cart/empty_cart', empty_cart),
