@@ -19,6 +19,15 @@ def products(request):
     serialized = ProductSerializer(products, many=True)
     return Response(status=status.HTTP_200_OK, data = serialized.data)
 
+
+@api_view(['GET'])
+def product_detail(request, id):
+    product = Product.objects.get(id=id)
+    serialized = ProductSerializer(product)
+    return Response(status=status.HTTP_200_OK, data = serialized.data)
+
+
+
 class AddToCartSerializer(ModelSerializer):
     class Meta:
         model = Cart

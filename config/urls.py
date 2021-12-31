@@ -24,7 +24,7 @@ from rest_framework.routers import DefaultRouter
 from cart.views import buy_cart, empty_cart, get_cart, change_quantity, remove_item
 from categories.views import get_categories
 from orders.views import get_orders
-from products.views import add_to_cart, products
+from products.views import add_to_cart, product_detail, products
 from users.views import UserViewSet
 
 
@@ -62,6 +62,7 @@ urlpatterns = [
     path('cart/buy', buy_cart),
     path('cart/', get_cart),
     path('products/add_to_cart/',add_to_cart),
+    path('products/<id>/', product_detail),
     path('products/', products),
     path('admin/', admin.site.urls),
 ] + router.urls
