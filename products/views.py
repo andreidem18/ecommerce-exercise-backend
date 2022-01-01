@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.serializers import ModelSerializer
 from products.serializer import ProductSerializer
 from .models import Product
@@ -10,6 +11,7 @@ from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def products(request):
     data = dict()
     if request.query_params:
