@@ -35,7 +35,7 @@ class UserViewSet(ModelViewSet):
             email = request.data['email'], first_name = request.data['first_name'], last_name = request.data['last_name']
         )
         user.set_password(request.data['password'])
-        serialized = CreateUserSerializer(user)
+        serialized = UserSerializer(user)
         return Response(status = status.HTTP_201_CREATED, data = serialized.data)
     
     
@@ -43,17 +43,5 @@ class UserViewSet(ModelViewSet):
     def myself(self, request):
         user = request.user
         serialized = UserSerializer(user)
-        return Response(status=status.HTTP_200_OK, data = serialized.data)
-    
-    @swagger_auto_schema(methods=['post'], request_body=None)
-    @action(methods=['POST'], detail=False)
-    def buy_cart(self, request):
-        user = request.user
-        orders = list()
-        for item in user.cart.all():
-            order = Order.objects.create(product=item.product, user=user, quantity=item.quantity)
-            orders.append(order)
-        user.cart.all().delete()
-        serialized = OrderSerializer(orders, many=True)
         return Response(status=status.HTTP_200_OK, data = serialized.data)
     
