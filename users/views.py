@@ -35,6 +35,7 @@ class UserViewSet(ModelViewSet):
             email = request.data['email'], first_name = request.data['first_name'], last_name = request.data['last_name']
         )
         user.set_password(request.data['password'])
+        user.save()
         serialized = UserSerializer(user)
         return Response(status = status.HTTP_201_CREATED, data = serialized.data)
     
