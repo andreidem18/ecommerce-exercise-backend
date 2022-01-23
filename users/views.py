@@ -1,14 +1,9 @@
 from django.shortcuts import render
-from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.serializers import ModelSerializer
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
-from drf_yasg.utils import swagger_auto_schema
-from orders.models import Order
-from orders.serializer import OrderSerializer
 from .models import User
 from .serializer import UserSerializer, CreateUserSerializer
         

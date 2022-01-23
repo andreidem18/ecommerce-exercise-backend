@@ -9,7 +9,12 @@ from cart.serializer import CartSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
+name = openapi.Parameter('name__icontains', openapi.IN_QUERY, description="filter by name", type=openapi.TYPE_STRING)
+category = openapi.Parameter('category', openapi.IN_QUERY, description="filter by category", type=openapi.TYPE_INTEGER)
+
+@swagger_auto_schema(methods=['get'], manual_parameters=[name, category])
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def products(request):
