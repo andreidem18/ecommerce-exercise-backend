@@ -34,7 +34,7 @@ class QuantitySerializer(ModelSerializer):
 @swagger_auto_schema(methods=['put'], request_body=QuantitySerializer)
 @api_view(['PUT'])
 def change_quantity(request, item_id):
-    item = Cart.objects.get(id=id)
+    item = Cart.objects.get(id=item_id)
     item.quantity = request.data['quantity']
     item.save()
     serialized = CartSerializer(item)
